@@ -94,12 +94,13 @@ html_theme_options = {
 
 html_sidebars = {
     '**': [
+        'sidebar.html',
+        # 'relations.html',
         # 'about.html',
         # 'globaltoc.html',
 
         # 'navigation.html',
-        'relations.html',
-        # sourcelink.html
+        # 'sourcelink.html',
         # 'searchbox.html',
         # 'donate.html',
     ]
@@ -123,9 +124,26 @@ autodoc_mock_imports = [
 
 todo_include_todos = True
 
-html_logo = '_static/logo.svg'
-html_favicon = '_static/favico.ico'
+# html_logo = '_static/logo.svg'
+# html_favicon = '_static/favico.ico'
 
 
 def setup(app):
     app.add_stylesheet("custom.css")
+
+
+with open('_templates/sidebar.html', 'w') as sidebar:
+
+    sidebar.write(
+        '<h1 class="logo"><a href="https://gcpds.readthedocs.io/">GCPDS</a></h1>\n')
+
+    sidebar.write('<ul>\n')
+
+    for subpackage in ['utils', 'entropies']:
+        sidebar.write(f'''
+    <li class="toctree-l1">
+        <a class="reference internal" href="https://gcpds.readthedocs.io/projects/{subpackage}/en/latest/">
+            {subpackage.capitalize()}
+        </a>
+    </li>\n''')
+    sidebar.write('</ul>\n')
