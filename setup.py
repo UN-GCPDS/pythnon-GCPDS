@@ -7,9 +7,14 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
+<<<<<<< HEAD
     name='gcpds-utils',
     version='0.1a0',
     packages=['gcpds.utils'],
+=======
+    name='gcpds',
+    version='0.1a0',
+>>>>>>> 38fc044e1da32068176d2a17e510389dc2afa2b5
 
     author='Yeison Cardona',
     author_email='yencardonaal@unal.edu.co',
@@ -18,6 +23,7 @@ setup(
 
     download_url='',
 
+<<<<<<< HEAD
     install_requires=['numpy',
                       'scipy',
                       'matplotlib',
@@ -37,6 +43,12 @@ setup(
     ],
 
 
+=======
+    install_requires=['gcpds-utils',
+                      'gcpds-entropies',
+                      ],
+
+>>>>>>> 38fc044e1da32068176d2a17e510389dc2afa2b5
     include_package_data=True,
     license='Simplified BSD License',
     description="",

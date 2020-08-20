@@ -133,6 +133,8 @@ Is possible to select the runs by ``channel`` and/or ``class``
 
 The classes and the channels can be indexes instead of labels:
 
+The channels indexes, by convention, are 1-based array.
+
 .. code:: ipython3
 
     run, class_ = db.get_data(classes=[1, 3], channels=[1, 5, 10])
@@ -146,8 +148,6 @@ The classes and the channels can be indexes instead of labels:
     ((144, 3, 1750), (144,))
 
 
-
-The channels indexes, by convention, are 1-based array.
 
 --------------
 
