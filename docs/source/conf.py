@@ -139,7 +139,7 @@ with open('_templates/sidebar.html', 'w') as sidebar:
 
     sidebar.write('<ul>\n')
 
-    for subpackage in ['utils', 'entropies']:
+    for subpackage in ['utils', 'entropies', 'filters']:
         sidebar.write(f'''
     <li class="toctree-l1">
         <a class="reference internal" href="https://gcpds.readthedocs.io/projects/{subpackage}/en/latest/">
@@ -147,3 +147,75 @@ with open('_templates/sidebar.html', 'w') as sidebar:
         </a>
     </li>\n''')
     sidebar.write('</ul>\n')
+
+
+highlight_language = 'none'
+html_sourcelink_suffix = ''
+
+# suppress_warnings = [
+    # 'nbsphinx',
+# ]
+
+nbsphinx_execute_arguments = [
+    "--InlineBackend.figure_formats={'svg', 'pdf'}",
+    "--InlineBackend.rc={'figure.dpi': 96}",
+]
+
+nbsphinx_execute = 'never'
+# nbsphinx_input_prompt = 'In [%s]:'
+# nbsphinx_output_prompt = 'Out[%s]:'
+nbsphinx_kernel_name = 'python3'
+nbsphinx_prompt_width = '0'
+
+nbsphinx_prolog = """
+.. raw:: html
+
+    <style>
+        .nbinput .prompt,
+        .nboutput .prompt {
+            display: none;
+    }
+    </style>
+"""
+
+
+notebooks_dir = 'notebooks'
+
+notebooks_list = os.listdir(os.path.join(
+    os.path.abspath(os.path.dirname(__file__)), notebooks_dir))
+notebooks_list = filter(lambda s: not s.startswith('__'), notebooks_list)
+
+notebooks = []
+for notebook in notebooks_list:
+    if notebook not in ['readme.ipynb', 'license.ipynb'] and notebook.endswith('.ipynb'):
+        notebooks.append(f"{notebooks_dir}/{notebook.replace('.ipynb', '')}")
+
+notebooks = '\n   '.join(sorted(notebooks))
+
+with open('index.rst', 'w') as file:
+    file.write(f"""
+.. include:: {notebooks_dir}/readme.rst
+
+Navigation
+----------
+
+.. toctree::
+   :maxdepth: 2
+   :name: mastertoc
+
+   {notebooks}
+
+
+Indices and tables
+------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+    """)
+
+os.system("jupyter nbconvert --to rst notebooks/readme.ipynb")
+os.system("jupyter nbconvert --to markdown notebooks/readme.ipynb")
+os.system("mv notebooks/readme.md ../../README.md")
+
