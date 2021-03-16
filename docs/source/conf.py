@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('exts'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'GCPDS'
-copyright = '2020, GCPDS'
+project = 'utils'
+copyright = '2020, GCPDS - utils'
 author = 'GCPDS'
 
 
@@ -37,6 +37,10 @@ extensions = [
     'sphinx.ext.autosectionlabel',
     'sphinx.ext.todo',
     'IPython.sphinxext.ipython_console_highlighting',
+
+
+    'nbsphinx',
+    'sphinx.ext.mathjax',
 ]
 
 naoleon_google_docstring = False
@@ -61,6 +65,7 @@ exclude_patterns = []
 
 # The master toctree document.
 master_doc = 'index'
+
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -95,13 +100,12 @@ html_theme_options = {
 html_sidebars = {
     '**': [
         'sidebar.html',
-        # 'relations.html',
-        # 'about.html',
         # 'globaltoc.html',
+        'navigation.html',
+        'relations.html',
+        # sourcelink.html
+        'searchbox.html',
 
-        # 'navigation.html',
-        # 'sourcelink.html',
-        # 'searchbox.html',
         # 'donate.html',
     ]
 }
@@ -133,12 +137,6 @@ def setup(app):
 
 
 with open('_templates/sidebar.html', 'w') as sidebar:
-
-    sidebar.write(
-        '<h1 class="logo"><a href="https://gcpds.readthedocs.io/">GCPDS</a></h1>\n')
-
-    sidebar.write('<ul>\n')
-
     for subpackage in ['utils', 'entropies', 'filters']:
         sidebar.write(f'''
     <li class="toctree-l1">
@@ -147,36 +145,6 @@ with open('_templates/sidebar.html', 'w') as sidebar:
         </a>
     </li>\n''')
     sidebar.write('</ul>\n')
-
-
-highlight_language = 'none'
-html_sourcelink_suffix = ''
-
-# suppress_warnings = [
-    # 'nbsphinx',
-# ]
-
-nbsphinx_execute_arguments = [
-    "--InlineBackend.figure_formats={'svg', 'pdf'}",
-    "--InlineBackend.rc={'figure.dpi': 96}",
-]
-
-nbsphinx_execute = 'never'
-# nbsphinx_input_prompt = 'In [%s]:'
-# nbsphinx_output_prompt = 'Out[%s]:'
-nbsphinx_kernel_name = 'python3'
-nbsphinx_prompt_width = '0'
-
-nbsphinx_prolog = """
-.. raw:: html
-
-    <style>
-        .nbinput .prompt,
-        .nboutput .prompt {
-            display: none;
-    }
-    </style>
-"""
 
 
 notebooks_dir = 'notebooks'
@@ -218,4 +186,3 @@ Indices and tables
 os.system("jupyter nbconvert --to rst notebooks/readme.ipynb")
 os.system("jupyter nbconvert --to markdown notebooks/readme.ipynb")
 os.system("mv notebooks/readme.md ../../README.md")
-

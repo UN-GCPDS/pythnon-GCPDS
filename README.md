@@ -1,6 +1,1 @@
 # GCPDS
-
-
-```python
-LIST HERE :)
-```
