@@ -7,9 +7,9 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='gcpds-utils',
+    name='gcpds',
     version='0.1a0',
-    packages=['gcpds.utils'],
+    packages=[],
     author='Yeison Cardona',
     author_email='yencardonaal@unal.edu.co',
     maintainer='Yeison Cardona',
@@ -17,23 +17,10 @@ setup(
 
     download_url='',
 
-    install_requires=['numpy',
-                      'scipy',
-                      'matplotlib',
-                      'mne',
-                      'tables',
-
-                      'jinja2',
-                      'colorama',
-                      'sphinx',
-                      'ipython',
-                      'tqdm',
-
+    install_requires=['gcpds-utils',
+                      'gcpds-filters',
                       ],
 
-    scripts=[
-       "cmd/gcpds_distutils",
-    ],
 
     include_package_data=True,
     license='Simplified BSD License',
@@ -43,7 +30,7 @@ setup(
     long_description=README,
     long_description_content_type='text/markdown',
 
-    python_requires='>=3.6',
+    python_requires='>=3.8',
 
     classifiers=[
        'Development Status :: 4 - Beta',
