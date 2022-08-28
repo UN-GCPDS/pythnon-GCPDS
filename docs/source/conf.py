@@ -137,7 +137,7 @@ def setup(app):
 
 
 with open('_templates/sidebar.html', 'w') as sidebar:
-    for subpackage in ['utils', 'entropies', 'filters']:
+    for subpackage in ['utils', 'entropies', 'filters', 'visualizations']:
         sidebar.write(f'''
     <li class="toctree-l1">
         <a class="reference internal" href="https://gcpds.readthedocs.io/projects/{subpackage}/en/latest/">
