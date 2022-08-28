@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('exts'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'utils'
-copyright = '2020, GCPDS - utils'
+project = 'GCPDS'
+copyright = '2020, GCPDS'
 author = 'GCPDS'
 
 
